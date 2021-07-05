@@ -10,6 +10,7 @@ set(ProjectName "${PROJECT_NAME}")
 set(Vendor "${CMAKE_SOURCE_DIR}/vendor")
 set(Assets "${CMAKE_SOURCE_DIR}/assets")
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/bin")
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/sdl2")
 
 if("${CMAKE_BUILD_TYPE}" STREQUAL "")
   set(CMAKE_BUILD_TYPE "Release")
@@ -20,6 +21,15 @@ endif()
 if(EXISTS ${Assets})
   file(COPY ${Assets} DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
 endif()
+
+
+## Find Libraries
+find_package(SDL2      )
+find_package(SDL2_mixer)
+find_package(SDL2_gfx  )
+find_package(SDL2_image)
+find_package(SDL2_ttf  )
+find_package(SDL2_net  )
 
 
 
@@ -50,11 +60,19 @@ set_target_properties(${ProjectName} PROPERTIES
 ## Include directories
 target_include_directories(${ProjectName} PRIVATE
   "${CMAKE_SOURCE_DIR}/include"
+  ${SDL2_INCLUDE_DIRS}
 )
 
 
 ## Link Libraries
-#target_link_libraries(${ProjectName} PRIVATE )
+target_link_libraries(${ProjectName} PRIVATE
+  SDL2
+  SDL2_mixer
+  SDL2_gfx
+  SDL2_image
+  SDL2_ttf
+  SDL2_net
+)
 
 
 ## Install Rules
