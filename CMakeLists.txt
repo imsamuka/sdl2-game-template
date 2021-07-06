@@ -60,6 +60,7 @@ set_target_properties(${ProjectName} PROPERTIES
 ## Include directories
 target_include_directories(${ProjectName} PRIVATE
   "${CMAKE_SOURCE_DIR}/include"
+  "${Vendor}/entt"
   ${SDL2_INCLUDE_DIRS}
 )
 
