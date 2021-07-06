@@ -16,6 +16,16 @@ if("${CMAKE_BUILD_TYPE}" STREQUAL "")
   set(CMAKE_BUILD_TYPE "Release")
 endif()
 
+if("${CMAKE_BUILD_TYPE}" STREQUAL "Debug")
+  set(ModeSuffix "d")
+elseif("${CMAKE_BUILD_TYPE}" STREQUAL "RelWithDebInfo")
+  set(ModeSuffix "rd")
+elseif("${CMAKE_BUILD_TYPE}" STREQUAL "MinSizeRel")
+  set(ModeSuffix "ms")
+else() # Release Mode
+  set(ModeSuffix "r")
+endif()
+
 
 # Copy ./assets to ./bin/assets
 if(EXISTS ${Assets})
@@ -49,7 +59,7 @@ add_executable(${ProjectName} ${src})
 ## Target Properties
 set_target_properties(${ProjectName} PROPERTIES
   CXX_STANDARD 17
-  OUTPUT_NAME "${ProjectName}-[${PROJECT_VERSION}-${CMAKE_BUILD_TYPE}]"
+  OUTPUT_NAME "${ProjectName}-[${PROJECT_VERSION}${ModeSuffix}]"
 )
 
 
