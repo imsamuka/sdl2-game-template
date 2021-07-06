@@ -1,6 +1,6 @@
-#include "Main.h"
+#include "Main.hpp"
 
 int main() {
-    runTests();
-    return 0;
+  runTests();
+  return 0;
 }
