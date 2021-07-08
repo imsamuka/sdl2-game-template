@@ -1,6 +1,8 @@
-#include "Main.hpp"
+#include "Game.hpp"
 
-int main() {
-  runTests();
+int main(){
+  Game game;
+  if (game.init()) game.run();
+  else return 1;
   return 0;
 }
